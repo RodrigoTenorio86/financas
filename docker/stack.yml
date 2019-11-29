@@ -1,0 +1,11 @@
+version: '3.1'
+
+services:
+  db_maria:
+    image: rodrigotenorio86/platformmysql
+ #   restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: r123
