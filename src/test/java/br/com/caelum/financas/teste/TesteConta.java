@@ -15,7 +15,7 @@ public class TesteConta {
 		conta.setAgencia("123");
 		conta.setNumero("456");
 		
-		EntityManager em = new JPAUtil().createEntity();
+		EntityManager em = new JPAUtil().getEntityManager();
 		
 		em.getTransaction().begin();
 		em.persist(conta);
