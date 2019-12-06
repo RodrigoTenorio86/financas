@@ -5,14 +5,20 @@ import javax.persistence.EntityManager;
 import br.com.caelum.financas.modelo.Conta;
 import br.com.caelum.financas.util.JPAUtil;
 
-public class FindConta {
+public class TestRemovedConta {
 	public static void main(String[] args) {
+
+
+
 		EntityManager em = new JPAUtil().getEntityManager();
 		em.getTransaction().begin();
-		//Managed (gerenciado)
+		
 		Conta conta = em.find(Conta.class, 1);
-		conta.setTitular("Jose Roberto");
+		//Removed
+		em.remove(conta);
+		
 		em.getTransaction().commit();
+		em.close();
 
 	}
 }
