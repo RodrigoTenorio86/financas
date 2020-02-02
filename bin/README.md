@@ -1,1 +1,1 @@
-Java, JPA, Maven, Git, Jenkins, Docker e MYSQL: Persista seus objetos com a JPA2 e Hibernate.
+Java e JPA: Persistencia de dados em banco MySQL com Hibernate e ferramentas Docker e Jenkins.
