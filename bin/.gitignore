@@ -29,3 +29,8 @@ build/
 
 ### VS Code ###
 .vscode/
+/.gitignore
+/README.md
+/docker/
+/pom.xml
+/src/
