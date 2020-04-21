@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
 /**
  * @author rtenorio
  * resolver problema
@@ -18,18 +20,22 @@ public class TestMovimentacoes {
 		EntityManager em = new JPAUtil().getEntityManager();
 		em.getTransaction().begin();
 		
-		Categoria viagem = new Categoria();
-		viagem.setNome("viagem");
+		Categoria lanche = new Categoria();
+		lanche.setNome("Lanche");
 		
-		String jpql ="select m from tbl_movimentacao m join m.categoria c where c = :pCategoria and m.valor > 500 and m.tipo = :pTipoMovimentacao";
+		//String jpql ="select m from tbl_movimentacao m join m.categoria c where c = :pCategoria and m.valor > 500 and m.tipo = :pTipoMovimentacao";
 		
-		Query query = em.createQuery(jpql);
+		//Query query = em.createQuery(jpql);
 		
+		TypedQuery<Movimentacao> typedQuery = em.createNamedQuery("Movimentacao.CalcularValorAcimar500", Movimentacao.class);
+								 typedQuery.setParameter("pCategoria", lanche); 
+								 typedQuery.setParameter("pTipoMovimentacao", TipoMovimentacao.SAIDA);		
 		
-		query.setParameter("pCategoria", viagem);
-		query.setParameter("pTipoMovimentacao", TipoMovimentacao.SAIDA);
+		//query.setParameter("pCategoria", viagem);
+		//query.setParameter("pTipoMovimentacao", TipoMovimentacao.SAIDA);
 		
-		List<Movimentacao> movimentacaos = query.getResultList();
+		//List<Movimentacao> movimentacaos = query.getResultList();
+		List<Movimentacao> movimentacaos = typedQuery.getResultList();
 		
 		movimentacaos.forEach(m->{
 			System.out.println("Categoria: "+m.getDescricao());

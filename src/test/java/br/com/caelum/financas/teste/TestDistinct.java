@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import br.com.caelum.financas.modelo.Conta;
 import br.com.caelum.financas.util.JPAUtil;
@@ -13,12 +14,16 @@ public class TestDistinct {
 		EntityManager em = new JPAUtil().getEntityManager();
 		em.getTransaction().begin();
 		
-		String jpql= "select distinct c from tbl_conta c left join fetch c.movimentacaos";//certa
+		//String jpql= "select distinct c from tbl_conta c left join fetch c.movimentacaos";//certa
 		//String jpql="select conta.titular from tbl_conta conta inner join tbl_movimentacao movimentacao on conta.id=movimentacao.conta.id";
 		
-		Query query = em.createQuery(jpql);
+		//Query query = em.createQuery(jpql);
 		
-		List<Conta>contas= query.getResultList();
+		TypedQuery<Conta> typedQuery=em.createNamedQuery("Conta.uniaoMovimentacao", Conta.class);
+		
+		//List<Conta>contas= query.getResultList();
+		
+		List<Conta>contas = typedQuery.getResultList();
 		
 		contas.forEach(conta ->{
 			System.out.println("Titular: "+conta.getTitular()+" "+"Movimentacoes: "+conta.getMovimentacaos().size());

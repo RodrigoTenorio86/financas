@@ -14,13 +14,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity(name = "tbl_movimentacao")
-@NamedQuery(query = "select max(m.valor) from tbl_movimentacao m where m.conta = :pConta", 
-			name = "funcaoMax")
+@NamedQueries({
+	@NamedQuery(query = "select max(m.valor) from tbl_movimentacao m where m.conta = :pConta", 	name = "funcaoMax"),
+	@NamedQuery(query = "select m from tbl_movimentacao m join m.categoria c where c = :pCategoria", name="Movimentacao.uniaoCategoria"),
+	@NamedQuery(query = "select sum(m.valor) from tbl_movimentacao m where m.conta = :pConta and m.tipo = :pTipo order by m.valor desc", name="Movimentacao.uniaoContaSomar"),
+	@NamedQuery(query = "select m from tbl_movimentacao m join m.categoria c where c = :pCategoria and m.valor < 500 and m.tipo = :pTipoMovimentacao", name="Movimentacao.CalcularValorAcimar500")
+})
 public class Movimentacao {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +38,7 @@ public class Movimentacao {
 	//@Temporal(TemporalType.TIMESTAMP)
 	private LocalDate data;
 	private String descricao;
-	@ManyToMany(cascade = {CascadeType.ALL})
+	@ManyToMany
 	private List<Categoria> categoria;	
 	@ManyToOne
 	private Conta conta;
