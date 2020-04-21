@@ -11,4 +11,11 @@ services:
       MYSQL_ROOT_PASSWORD: Rr123
       MYSQL_DATABASE: financas
       MYSQL_PASSWORD: Rr123
+  db_oracle:
+    image: oracle-xe:18c
+    ports:
+      - 1521:1521
+      - 5500:5500
+    environment:
+      ORACLE_PWD: Rr123
       

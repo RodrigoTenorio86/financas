@@ -5,7 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class JPAUtil {
-	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("financas-oracle");
+	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("financas-mysql");
 
 	public EntityManager getEntityManager() {
 		return emf.createEntityManager();

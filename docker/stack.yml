@@ -2,7 +2,7 @@ version: '3.1'
 
 services:
   db_mysql:
-    image: rodrigotenorio86/platformmysql
+    image: rodrigotenorio86/mysql
  #   restart: always
     ports:
       - 3306:3306
@@ -11,11 +11,11 @@ services:
       MYSQL_ROOT_PASSWORD: Rr123
       MYSQL_DATABASE: financas
       MYSQL_PASSWORD: Rr123
-  db_oracle:
-    image: oracle-xe:18c
-    ports:
-      - 1521:1521
-      - 5500:5500
-    environment:
-      ORACLE_PWD: Rr123
+#  db_oracle:
+#    image: oracle-xe:18c
+#    ports:
+#      - 1521:1521
+#      - 5500:5500
+#    environment:
+#      ORACLE_PWD: Rr123
       
