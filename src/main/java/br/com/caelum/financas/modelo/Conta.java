@@ -1,5 +1,6 @@
 package br.com.caelum.financas.modelo;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -21,8 +22,17 @@ public class Conta {
 	private String numero;
 	@OneToMany(mappedBy = "conta")
 	private List<Movimentacao>movimentacaos;
+	private BigDecimal saldo;
 	
 	
+
+	public BigDecimal getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(BigDecimal saldo) {
+		this.saldo = saldo;
+	}
 
 	public List<Movimentacao> getMovimentacaos() {
 		return movimentacaos;
